@@ -8,15 +8,10 @@ It's hosted on [GitHub Container Registry](https://github.com/phpstan/phpstan/pk
 
 ## Supported tags
 
-- `2-php8.3`, `latest-php8.3` (PHP 8.3)
-- `2-php8.2`, `latest-php8.2` (PHP 8.2)
-- `2-php8.1`, `latest-php8.1` (PHP 8.1)
-- `2-php8.0`, `latest-php8.0` (PHP 8.0)
-
-- `1-php8.3` (PHP 8.3)
-- `1-php8.2` (PHP 8.2)
-- `1-php8.1` (PHP 8.1)
-- `1-php8.0` (PHP 8.0)
+- `1-php8.3`, `latest-php8.3` (PHP 8.3)
+- `1-php8.2`, `latest-php8.2` (PHP 8.2)
+- `1-php8.1`, `latest-php8.1` (PHP 8.1)
+- `1-php8.0`, `latest-php8.0` (PHP 8.0)
 
 - `nightly-php8.3` - latest dev version (PHP 8.3)
 - `nightly-php8.2` - latest dev version (PHP 8.2)
@@ -26,7 +21,7 @@ It's hosted on [GitHub Container Registry](https://github.com/phpstan/phpstan/pk
 ## Installation
 
 ```bash
-docker pull ghcr.io/phpstan/phpstan:2-php8.3
+docker pull ghcr.io/phpstan/phpstan:latest
 ```
 
 If you have your own Docker image and just want to put PHPStan there, you can with this command in your `Dockerfile`:
@@ -46,7 +41,7 @@ parameters:
 
 ## Usage
 
-We recommend to use the images as a shell alias shortcut.
+We recommend using the images as a shell alias shortcut.
 
 To use `phpstan` everywhere  in the CLI add this line to your `~/.zshrc`, `~/.bashrc`, or `~/.profile`.
 
@@ -70,7 +65,7 @@ docker run --rm -v /path/to/app:/app ghcr.io/phpstan/phpstan analyse /app/src
 
 If you need a PHPStan extension, for example [phpstan/phpstan-phpunit](https://github.com/phpstan/phpstan-phpunit), you can simply
 extend an existing image and add the relevant extension via Composer.
-In some cases you also need some additional PHP extensions like DOM. (see section below)
+In some cases, you also need some additional PHP extensions like DOM. (see section below)
 
 Here is an example Dockerfile for `phpstan/phpstan-phpunit`:
 
@@ -79,7 +74,7 @@ FROM ghcr.io/phpstan/phpstan:latest
 RUN composer global require phpstan/phpstan-phpunit
 ```
 
-You can update the `phpstan.neon` file in order to use the extension:
+You can update the `phpstan.neon` file to use the extension:
 
 ```yaml
 includes:
@@ -88,12 +83,12 @@ includes:
 
 ## Install PHP extensions
 
-Sometimes your codebase requires some additional PHP extensions like `intl` or maybe `soap`.
+Sometimes your codebase requires additional PHP extensions like `intl` or maybe `soap`.
 
 Therefore you need to know that our Docker image extends the [official php:cli-alpine Docker image](https://hub.docker.com/_/php).
 So only the default built-in extensions are available (see below).
 
-To solve this issue you can extend our Docker image in a custom Dockerfile like this, for example to add `soap` and `intl`:
+To solve this issue you can extend our Docker image in a custom Dockerfile like this, for example, to add `soap` and `intl`:
 
 ```docker
 FROM ghcr.io/phpstan/phpstan:latest
